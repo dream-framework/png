@@ -23,6 +23,7 @@ define_target "png" do |target|
 	end
 	
 	target.depends :platform
+	target.depends "Library/z"
 	
 	target.provides "Library/png" do
 		append linkflags "-lpng"
