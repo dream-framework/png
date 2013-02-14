@@ -3,22 +3,20 @@
 #  This file is part of the "Teapot" project, and is released under the MIT license.
 #
 
-required_version "0.5"
+required_version "0.6"
 
 define_target "png" do |target|
 	target.install do |environment|
-		environment.use in:(package.path + "libpng-1.5.13") do |config|
-			Commands.run("make", "clean") if File.exist? "Makefile"
-				
+		install_external(package.path, "libpng-1.5.13", environment) do |config, fresh|
 			Commands.run("./configure",
 				"--prefix=#{config.install_prefix}",
 				"--disable-dependency-tracking",
 				"--enable-shared=no",
 				"--enable-static=yes",
 				*config.configure
-			)
+			) if fresh
 				
-			Commands.run("make", "install")
+			Commands.make_install
 		end
 	end
 	
