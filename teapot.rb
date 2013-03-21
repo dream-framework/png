@@ -6,8 +6,8 @@
 required_version "0.6"
 
 define_target "png" do |target|
-	target.install do |environment|
-		install_external(package.path, "libpng-1.5.13", environment) do |config, fresh|
+	target.build do |environment|
+		build_external(package.path, "libpng-1.5.13", environment) do |config, fresh|
 			Commands.run("./configure",
 				"--prefix=#{config.install_prefix}",
 				"--disable-dependency-tracking",
