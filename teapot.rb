@@ -11,7 +11,9 @@ define_target "png" do |target|
 		cache_prefix = Files::Directory.join(environment[:build_prefix], "libpng-1.5.13-#{environment.checksum}")
 		package_files = Path.join(environment[:install_prefix], "lib/pkgconfig/libpng15.pc")
 		
-		cmake source: source_files, build_prefix: cache_prefix
+		cmake source: source_files, build_prefix: cache_prefix, arguments: [
+			"-DBUILD_SHARED_LIBS=OFF",
+		]
 		
 		make prefix: cache_prefix, package_files: package_files
 	end
