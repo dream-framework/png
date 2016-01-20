@@ -9,7 +9,7 @@ define_target "png" do |target|
 	target.build do
 		source_files = Files::Directory.join(target.package.path, "libpng-1.6.18")
 		cache_prefix = Files::Directory.join(environment[:build_prefix], "libpng-1.6.18-#{environment.checksum}")
-		package_files = Path.join(environment[:install_prefix], "lib/pkgconfig/libpng16.pc")
+		package_files = Path.join(environment[:install_prefix], "lib/libpng.a")
 		
 		cmake source: source_files, build_prefix: cache_prefix, arguments: [
 			"-DBUILD_SHARED_LIBS=OFF",
@@ -25,7 +25,7 @@ define_target "png" do |target|
 	target.depends "Build/CMake"
 	
 	target.provides "Library/png" do
-		append linkflags "-lpng"
+		append linkflags {install_prefix + "lib/libpng.a"}
 	end
 end
 
