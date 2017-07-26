@@ -8,8 +8,8 @@ teapot_version "1.0.0"
 define_target "png" do |target|
 	target.build do
 		source_files = Files::Directory.join(target.package.path, "libpng")
-		cache_prefix = Files::Directory.join(environment[:build_prefix], "libpng-#{environment.checksum}")
-		package_files = Path.join(environment[:install_prefix], "lib/libpng.a")
+		cache_prefix = environment[:build_prefix] / environment.checksum + "libpng"
+		package_files = environment[:install_prefix] / "lib/libpng.a"
 		
 		cmake source: source_files, build_prefix: cache_prefix, arguments: [
 			"-DBUILD_SHARED_LIBS=OFF",
