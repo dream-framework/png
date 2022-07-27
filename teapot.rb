@@ -20,6 +20,7 @@ define_target "png" do |target|
 		
 		cmake source: source_files, install_prefix: cache_prefix, arguments: [
 			"-DBUILD_SHARED_LIBS=OFF",
+			# "-DPNG_ARM_NEON=check",
 		], package_files: package_files
 		
 		append linkflags package_files
